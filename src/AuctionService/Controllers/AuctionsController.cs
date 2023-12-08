@@ -2,6 +2,7 @@ using AuctionService.Data;
 using AuctionService.DTOs;
 using AuctionService.Entities;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,22 +24,31 @@ public class AuctionsController : ControllerBase
     }
 
     //! Get All Auctions Summary
-    // Queries the database asynchronously to retrieve all auctions. 
-    // Eager loading with .Include(x => x.Item) ensures that the related Item entities are loaded in a single query.
-    // Orders the result by the Make property of the associated Item.
-    // Converts the result to a list asynchronously
-    //Uses AutoMatter to map the list of Auction entities to a list of AuctionDto's
-    
-    [HttpGet]
-    public async Task<ActionResult<List<AuctionDto>>> GetAllAuctions()
-    {
-        var auctions = await _context.Auctions
-            .Include(x => x.Item)
-            .OrderBy(x => x.Item.Make)
-            .ToListAsync();
+    // This endpoint retrieves a list of auctions asynchronously from the database.
+    // Eager loading with .Include(x => x.Item) ensures that associated Item entities are loaded in a single query, preventing N+1 query issues.
+    // Optionally filters auctions based on the provided 'date' parameter. If 'date' is provided, only auctions updated after the specified date are included.
+    // Orders the result by the 'Make' property of the associated Item in ascending order.
+    // Converts the result to a list of AuctionDto objects asynchronously.
+    // Uses AutoMapper to map the list of Auction entities to a list of AuctionDto's.
 
-            return _mapper.Map<List<AuctionDto>>(auctions);
+    [HttpGet]
+    public async Task<ActionResult<List<AuctionDto>>> GetAllAuctions(string date)
+    {
+        // Create a base query to retrieve auctions and eager load associated Item entities.
+        // NEED to use AsQueryable at the end. OrderBy returns a IOrderedQueryable when we need query to be IQueryable.
+        var query = _context.Auctions.OrderBy(x => x.Item.Make).AsQueryable();
+
+        // Optional: Filter auctions based on the provided 'date' parameter.
+        if (!string.IsNullOrEmpty(date))
+        {
+            // Only include auctions updated after the specified date.
+            // If we did not use AsQueryable on line 39. We would get a type error here because you cant use the Where LINQ method on an IOrderedQueryable.
+            query = query.Where(x => x.UpdatedAt.CompareTo(DateTime.Parse(date).ToUniversalTime()) > 0);
+        }
+
+        return await query.ProjectTo<AuctionDto>(_mapper.ConfigurationProvider).ToListAsync();
     }
+
 
 
      //! Get Auction by ID Summary
