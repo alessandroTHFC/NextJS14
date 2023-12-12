@@ -3,6 +3,8 @@ using AuctionService.DTOs;
 using AuctionService.Entities;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Contracts;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,11 +18,13 @@ public class AuctionsController : ControllerBase
     // Using Dependancy Injection to make the context and mapping services available within this controller
     private readonly AuctionDbContext _context;
     private readonly IMapper _mapper;
+    private readonly IPublishEndpoint _publishEndpoint;
 
-    public AuctionsController(AuctionDbContext context, IMapper mapper)
+    public AuctionsController(AuctionDbContext context, IMapper mapper, IPublishEndpoint publishEndpoint)
     {
         _context = context;
         _mapper = mapper;
+        _publishEndpoint = publishEndpoint;
     }
 
     //! Get All Auctions Summary
@@ -86,11 +90,19 @@ public class AuctionsController : ControllerBase
 
         _context.Auctions.Add(auction);
 
+        var newAuction = _mapper.Map<AuctionDto>(auction);
+
+        // This line of code below is publishing a message of type AuctionCreated to the message broker using MassTransit. 
+        // The message contains information about the newly created auction
+        // It will be sent to any consumers that are subscribed to the AuctionCreated message type.
+        await _publishEndpoint.Publish(_mapper.Map<AuctionCreated>(newAuction));
+
         var result = await _context.SaveChangesAsync() > 0;
+
 
         if (!result) return BadRequest("Could not save changes to the Database");
 
-        return CreatedAtAction(nameof(GetAuctionById), new {auction.Id}, _mapper.Map<AuctionDto>(auction));
+        return CreatedAtAction(nameof(GetAuctionById), new {auction.Id}, newAuction);
     }
 
 
@@ -100,6 +112,7 @@ public class AuctionsController : ControllerBase
     // Checks and updates the auction details using the properties from the UpdateAuctionDto.
     // The null-coalescing operator (??) ensures that if a property in UpdateAuctionDto is not provided,
     // it retains the existing value from the database.
+    // Publish a message in the shape of an AuctionUpdated Entity to the Message Service so it can be consumed by another service.
     // Saves changes to the database asynchronously.
     // If successful, returns a 200 OK response; otherwise, returns a 400 Bad Request response.
     [HttpPut("{id}")]
@@ -118,6 +131,9 @@ public class AuctionsController : ControllerBase
         auction.Item.Mileage = updateAuctionDto.Mileage ?? auction.Item.Mileage;
         auction.Item.Year = updateAuctionDto.Year ?? auction.Item.Year;
 
+        // Here we are publishing a message of type Auction Updated to our Service Bus by mapping the auction to a AuctionUpdated type. 
+        await _publishEndpoint.Publish(_mapper.Map<AuctionUpdated>(auction));
+
         var result = await _context.SaveChangesAsync() > 0;
 
         if (result) return Ok();
@@ -135,6 +151,8 @@ public class AuctionsController : ControllerBase
         // TODO: check seller == username
 
         _context.Auctions.Remove(auction);
+
+        await _publishEndpoint.Publish<AuctionDeleted>(new {Id = auction.Id.ToString()});
 
         var result = await _context.SaveChangesAsync() > 0;
 

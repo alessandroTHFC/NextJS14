@@ -1,6 +1,7 @@
 ﻿using AuctionService.DTOs;
 using AuctionService.Entities;
 using AutoMapper;
+using Contracts;
 
 namespace AuctionService.RequestHelpers;
 
@@ -27,6 +28,11 @@ public class MappingProfiles : Profile
         // This line defines a mapping from CreateAuctionDto to Item.
         // This mapping is separate from the one defined for Auction.    
         CreateMap<CreateAuctionDto, Item>();
+        // This line defines the mapping of AuctionDto to AuctionCreated, required for our Messaging Service
+        CreateMap<AuctionDto, AuctionCreated>();
+        // This line is defining the mapping required for Updating Auctions in our messaging service
+        CreateMap<Auction, AuctionUpdated>().IncludeMembers(a => a.Item);
+        CreateMap<Item, AuctionUpdated>();
     }
 
     //! Further explanation of ForMember statement

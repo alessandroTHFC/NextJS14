@@ -53,3 +53,11 @@
 /home/apangraz/reactLearning/Next14Udemy/NextJS14/src/SearchService/bin/Debug/net7.0/Microsoft.Extensions.Primitives.dll
 /home/apangraz/reactLearning/Next14Udemy/NextJS14/src/SearchService/bin/Debug/net7.0/Polly.dll
 /home/apangraz/reactLearning/Next14Udemy/NextJS14/src/SearchService/bin/Debug/net7.0/Polly.Extensions.Http.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/SearchService/bin/Debug/net7.0/MassTransit.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/SearchService/bin/Debug/net7.0/MassTransit.Abstractions.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/SearchService/bin/Debug/net7.0/MassTransit.RabbitMqTransport.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/SearchService/bin/Debug/net7.0/Microsoft.Extensions.Diagnostics.HealthChecks.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/SearchService/bin/Debug/net7.0/Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/SearchService/bin/Debug/net7.0/RabbitMQ.Client.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/SearchService/bin/Debug/net7.0/Contracts.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/SearchService/bin/Debug/net7.0/Contracts.pdb

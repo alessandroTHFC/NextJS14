@@ -37,3 +37,14 @@
 /home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/System.CodeDom.dll
 /home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/obj/Debug/net7.0/AuctionService.csproj.AssemblyReference.cache
 /home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/obj/Debug/net7.0/AuctionService.csproj.CopyComplete
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/MassTransit.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/MassTransit.Abstractions.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/MassTransit.RabbitMqTransport.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/Microsoft.Extensions.Diagnostics.HealthChecks.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/Microsoft.Extensions.Logging.Abstractions.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/Microsoft.Extensions.Options.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/RabbitMQ.Client.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/Contracts.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/Contracts.pdb
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/MassTransit.EntityFrameworkCoreIntegration.dll
