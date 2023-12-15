@@ -48,3 +48,10 @@
 /home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/Contracts.dll
 /home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/Contracts.pdb
 /home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/MassTransit.EntityFrameworkCoreIntegration.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/Microsoft.IdentityModel.Logging.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll

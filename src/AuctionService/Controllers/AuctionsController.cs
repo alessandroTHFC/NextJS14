@@ -5,6 +5,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Contracts;
 using MassTransit;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -81,12 +82,15 @@ public class AuctionsController : ControllerBase
     // Returns CreatedAtAction with the ID of the created auction and the mapped AuctionDto.
     // The CreatedAtAction returns a status code of 201 created and also includes a Location Header in the response
     // We can then utilise that location on the front end to perhaps re-direct the user to where the new resource is located.
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult<AuctionDto>> CreateAuction(CreateAuctionDto auctionDto)
     {
         var auction = _mapper.Map<Auction>(auctionDto);
         //TODO: Add current user as seller
-        auction.Seller = "test";
+
+
+        auction.Seller = User.Identity.Name;
 
         _context.Auctions.Add(auction);
 
@@ -115,6 +119,7 @@ public class AuctionsController : ControllerBase
     // Publish a message in the shape of an AuctionUpdated Entity to the Message Service so it can be consumed by another service.
     // Saves changes to the database asynchronously.
     // If successful, returns a 200 OK response; otherwise, returns a 400 Bad Request response.
+    [Authorize]
     [HttpPut("{id}")]
     public async Task<ActionResult> UpdateAuction(Guid id, UpdateAuctionDto updateAuctionDto)
     {
@@ -123,7 +128,7 @@ public class AuctionsController : ControllerBase
 
         if (auction == null) return NotFound();
 
-        //TODO: Check Seller == username
+        if (auction.Seller != User.Identity.Name) return Forbid();
 
         auction.Item.Make = updateAuctionDto.Make ?? auction.Item.Make;
         auction.Item.Model = updateAuctionDto.Model ?? auction.Item.Model;
@@ -148,7 +153,7 @@ public class AuctionsController : ControllerBase
 
         if (auction == null) return NotFound();
 
-        // TODO: check seller == username
+        if (auction.Seller != User.Identity.Name) return Forbid();
 
         _context.Auctions.Remove(auction);
 
