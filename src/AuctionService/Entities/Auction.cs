@@ -12,7 +12,7 @@ public class Auction
 
     public string Winner { get; set; }
 
-    public int SoldAmount { get; set; }
+    public int? SoldAmount { get; set; }
 
     public int? CurrentHighBid { get; set; }
 
