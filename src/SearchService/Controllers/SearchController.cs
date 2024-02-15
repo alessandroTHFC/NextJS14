@@ -31,7 +31,7 @@ public class SearchController : ControllerBase
         // Dynamically apply sorting based on the 'OrderBy' parameter in the query string.
         query = searchParams.OrderBy switch
         {
-            "make" => query.Sort(x => x.Ascending(a => a.Make)), // Sort by Make property in ascending order.
+            "make" => query.Sort(x => x.Ascending(a => a.Make)).Sort(x => x.Ascending(a => a.Model)), // Sort by Make property in ascending order.
             "new" => query.Sort(x => x.Descending(a => a.CreatedAt)), // Sort by creation date in descending order.
             _ => query.Sort(x => x.Ascending(a => a.AuctionEnd)) // Default: Sort by AuctionEnd property in ascending order.
         };
