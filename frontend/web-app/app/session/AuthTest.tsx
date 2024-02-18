@@ -2,7 +2,7 @@
 
 import { Result } from 'postcss'
 import React, { useState } from 'react'
-import { UpdateAuctionTest } from '../actions/AuctionActions';
+import { updateAuctionTest } from '../actions/AuctionActions';
 import { Button } from 'flowbite-react';
 
 export default function AuthTest() {
@@ -13,7 +13,7 @@ export default function AuthTest() {
     function doUpdate() {
         setResult(undefined);
         setLoading(true);
-        UpdateAuctionTest()
+        updateAuctionTest()
             .then(res => setResult(res))
             .finally(() => setLoading(false))
     }
