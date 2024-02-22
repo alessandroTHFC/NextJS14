@@ -3,7 +3,7 @@ using AuctionService.Entities;
 using Contracts;
 using MassTransit;
 
-namespace AuctionService;
+namespace AuctionService.Consumers;
 
 public class AuctionFinishedConsumer : IConsumer<AuctionFinished>
 {
@@ -15,7 +15,7 @@ public class AuctionFinishedConsumer : IConsumer<AuctionFinished>
     }
     public async Task Consume(ConsumeContext<AuctionFinished> context)
     {
-        var auction = await _context.Auctions.FindAsync(context.Message.AuctionId);
+        var auction = await _context.Auctions.FindAsync(Guid.Parse(context.Message.AuctionId));
 
         if (context.Message.ItemSold)
         {

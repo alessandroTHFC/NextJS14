@@ -3,12 +3,13 @@ using MassTransit;
 using MongoDB.Entities;
 using SearchService.Models;
 
-namespace SearchService;
+namespace SearchService.Consumers;
 
 public class AuctionFinishedConsumer : IConsumer<AuctionFinished>
 {
     public async Task Consume(ConsumeContext<AuctionFinished> context)
     {
+        Console.WriteLine("=======> CONSUMING AUCTION FINISHED IN SEARCH SVC <=========");
         var auction = await DB.Find<Item>().OneAsync(context.Message.AuctionId);
 
         if (context.Message.ItemSold)
@@ -17,6 +18,7 @@ public class AuctionFinishedConsumer : IConsumer<AuctionFinished>
             auction.SoldAmount = (int)context.Message.Amount;
         }
         auction.Status = "Finished";
+        Console.WriteLine("Consuming the AuctionStatus of {0}", auction.Status);
 
         await auction.SaveAsync();
     }

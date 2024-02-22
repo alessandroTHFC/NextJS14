@@ -15,7 +15,11 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddHttpClient<AuctionServiceHttpClient>().AddPolicyHandler(GetPolicy());
 builder.Services.AddMassTransit(x => 
 {
-    x.AddConsumersFromNamespaceContaining<AuctionCreatedConsumer>();
+    x.AddConsumer<BidPlacedConsumer>();
+    x.AddConsumer<AuctionCreatedConsumer>();
+    x.AddConsumer<AuctionDeletedConsumer>();
+    x.AddConsumer<AuctionFinishedConsumer>();
+    x.AddConsumer<AuctionUpdatedConsumer>();
 
     x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("search", false));
 

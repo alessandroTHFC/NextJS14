@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using MassTransit;
 using AuctionService.Consumers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using AuctionService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +26,9 @@ builder.Services.AddMassTransit(x =>
         o.UseBusOutbox();
     });
 
-    x.AddConsumersFromNamespaceContaining<AuctionCreatedFaultConsumer>();
+    x.AddConsumer<BidPlacedConsumer>();
+    x.AddConsumer<AuctionCreatedFaultConsumer>();
+    x.AddConsumer<AuctionFinishedConsumer>();
     x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("auction", false));
 
     x.UsingRabbitMq((context, cfg) =>
@@ -47,6 +50,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         opt.TokenValidationParameters.NameClaimType = "username";
     });
 
+builder.Services.AddGrpc();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -55,6 +61,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapGrpcService<GrpcAuctionService>();
 
 try
 {

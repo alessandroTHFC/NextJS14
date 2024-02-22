@@ -55,3 +55,10 @@
 /home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 /home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll
 /home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/Google.Protobuf.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/Grpc.AspNetCore.Server.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/Grpc.AspNetCore.Server.ClientFactory.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/Grpc.Core.Api.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/Grpc.Net.Client.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/Grpc.Net.ClientFactory.dll
+/home/apangraz/reactLearning/Next14Udemy/NextJS14/src/AuctionService/bin/Debug/net7.0/Grpc.Net.Common.dll
